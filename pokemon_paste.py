@@ -28,10 +28,16 @@ def get_pokemon_name():
     Returns:
         str: Pokemon name
     """
-    # TODO: Function body
-    return
+    # Function body
+    pok_name = sys.argv[2]
+    if pok_name == '':
+        print('Error: Missing Params')
+        sys.exit(1)
 
-def get_paste_data(pokemon_info):
+
+    return pok_name
+
+def get_paste_data(pokemon_info, poke_name):
     """Builds the title and body text for a PasteBin paste that lists a Pokemon's abilities.
 
     Args:
@@ -40,9 +46,18 @@ def get_paste_data(pokemon_info):
     Returns:
         (str, str): Title and body text for the PasteBin paste
     """    
-    # TODO: Build the paste title
-    # TODO: Build the paste body text
-    return # (title, body_text)
+    # Build the paste title
+    poke_name = str(poke_name).title()
+    title = f'{poke_name}\'s Abilities'
+
+    # Build the paste body text
+    body_text = ""
+
+    for abi in pokemon_info["abilities"]:
+        body_text += '- ' + abi["ability"]["name"] + "\n"
+
+
+    return (title, body_text)
 
 if __name__ == '__main__':
     main()
