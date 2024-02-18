@@ -34,14 +34,14 @@ def get_pokemon_info(pokemon_name):
     if response_msg.status_code == requests.codes.ok:
         print("success!")
         body_dict = response_msg.json()
-        return 
+        print(f"Getting information for {pokemon_name}......success")
+        return body_dict
 
         
     else:
         print("failure:(")
         print(f"{response_msg.status_code} {response_msg.reason} {response_msg.text}")
 
-    return
 
 if __name__ == '__main__':
     main()
