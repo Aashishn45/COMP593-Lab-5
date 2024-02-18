@@ -17,7 +17,7 @@ def main():
     poke_name = get_pokemon_name()
     poke_info = poke_api.get_pokemon_info(poke_name)
     if poke_info is not None:
-        paste_title, paste_body = get_paste_data(poke_info)
+        paste_title, paste_body = get_paste_data(poke_info, poke_name)
         paste_url = pastebin_api.post_new_paste(paste_title, paste_body, '1M')
         print(paste_url)
 
@@ -29,13 +29,11 @@ def get_pokemon_name():
         str: Pokemon name
     """
     # Function body
-    pok_name = sys.argv[2]
-    if pok_name == '':
-        print('Error: Missing Params')
+    if len(sys.argv) < 2:
+        print("ERROR: Missing Search term")
         sys.exit(1)
+    return sys.argv[1]
 
-
-    return pok_name
 
 def get_paste_data(pokemon_info, poke_name):
     """Builds the title and body text for a PasteBin paste that lists a Pokemon's abilities.
@@ -57,7 +55,7 @@ def get_paste_data(pokemon_info, poke_name):
         body_text += '- ' + abi["ability"]["name"] + "\n"
 
 
-    return (title, body_text)
+    return(title, body_text)
 
 if __name__ == '__main__':
     main()
